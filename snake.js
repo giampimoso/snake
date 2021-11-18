@@ -17,9 +17,10 @@ let boost = false;
 let scorriPancia=0;
 let mod=true;
 
-let speed = 7; //velocità gioco
+const SPMAX = 12, SPMIN = 7;
+let speed = SPMIN; //velocità gioco
 
-let tileCount = 80;
+let tileCount = 20;
 let tileSize = canvas.width/tileCount-4; //dimensione
 let hX = 10; // posizione testa x
 let hY = 10; // posizione testa y
@@ -159,7 +160,7 @@ function drawSnake(){
 
   snakeParts.push(new SnakePart(hX, hY)); //put an item at the end of the list next to the head
   while (snakeParts.length > tailDim) {
-    snakeParts .shift(); // remove the furthet item from the snake parts if have more than our tail size.
+    snakeParts.shift(); // remove the furthet item from the snake parts if have more than our tail size.
   }
 
     ctx.fillStyle = "#bef059";
@@ -167,8 +168,8 @@ function drawSnake(){
 }
 
 function moveSnake(){
-  if(boost) speed=12;
-  else speed=7;
+  if(boost) speed=SPMAX;
+  else speed=SPMIN;
 
   hX = hX + vX;
   hY = hY + vY;
