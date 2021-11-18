@@ -256,26 +256,26 @@ document.body.addEventListener('keydown', keyDown);
 
 function keyDown(event){
   if(newMove){
-  //up
-  if((/*event.keyCode == 87 ||*/ event.keyCode == 38) && vY!=1){
+  //up /*event.keyCode == 87 ||*/
+  if(( event.keyCode == 38) && vY!=1){
     vY = -1;
     vX = 0;
     newMove=false;
   }
-  //down
-  if((/*event.keyCode == 83 ||*/ event.keyCode == 40) && vY!=-1){
+  //down /*event.keyCode == 83 ||*/
+  if(( event.keyCode == 40) && vY!=-1){
     vY = 1;
     vX = 0;
     newMove=false;
   }
-  //left
-  if((/*event.keyCode == 65 ||*/ event.keyCode == 37) && vX!=1){
+  //left /*event.keyCode == 65 ||*/
+  if(( event.keyCode == 37) && vX!=1){
     vY = 0;
     vX = -1;
     newMove=false;
   }
-  //right
-  if((/*event.keyCode == 68 ||*/ event.keyCode == 39) && vX!=-1){
+  //right /*event.keyCode == 68 ||*/
+  if(( event.keyCode == 39) && vX!=-1){
     vY = 0;
     vX = 1;
     newMove=false;
