@@ -19,7 +19,7 @@ let mod=true;
 
 let speed = 7; //velocità gioco
 
-let tileCount = 40;
+let tileCount = 80;
 let tileSize = canvas.width/tileCount-4; //dimensione
 let hX = 10; // posizione testa x
 let hY = 10; // posizione testa y
