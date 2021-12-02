@@ -149,9 +149,6 @@ function drawSnake(){
     let part = snakeParts[i];
     if(i==scorriPancia){
       ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize+2, tileSize+2);
-      ctx.fillStyle = "white";
-      ctx.font = "10px Verdana";
-      ctx.fillText("Prova",part.x * tileCount, part.y * tileCount);
     }
     else ctx.fillRect(1+part.x * tileCount, 1+part.y * tileCount, tileSize, tileSize);
   }
@@ -169,6 +166,9 @@ function drawSnake(){
 
     ctx.fillStyle = "#bef059";
     ctx.fillRect(hX * tileCount,hY * tileCount,tileSize+2,tileSize+2);
+    ctx.fillStyle = "white";
+    ctx.font = "10px Verdana";
+    ctx.fillText("Prova",hX * tileCount,hY * tileCount-5);
 }
 
 function moveSnake(){
