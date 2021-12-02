@@ -50,7 +50,6 @@ document.getElementById("stMod").value = "Impatto con Muri";
 
 //game loop
 function drawG(){
-  //namePlayer = document.getElementById("username").value;
   if(!end) moveSnake();
 
   if(!mod){
@@ -168,7 +167,7 @@ function drawSnake(){
     ctx.fillRect(hX * tileCount,hY * tileCount,tileSize+2,tileSize+2);
     ctx.fillStyle = "white";
     ctx.font = "10px Verdana";
-    ctx.fillText("Prova",hX * tileCount,hY * tileCount);
+    ctx.fillText(document.getElementById("username").value,hX * tileCount,hY * tileCount);
 }
 
 function moveSnake(){
