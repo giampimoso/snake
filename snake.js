@@ -45,7 +45,7 @@ const boostMusic = new Audio("boostMusic.mp3")
 
 let newMove=true;
 let end=false;
-let nomePlayer=Prova;
+let nomePlayer="Prova";
 
 document.getElementById("stMod").value = "Impatto con Muri";
 
