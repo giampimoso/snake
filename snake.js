@@ -45,11 +45,13 @@ const boostMusic = new Audio("boostMusic.mp3")
 
 let newMove=true;
 let end=false;
+let nomePlayer=Prova;
 
 document.getElementById("stMod").value = "Impatto con Muri";
 
 //game loop
 function drawG(){
+  namePlayer = document.getElementById("username").value;
   if(!end) moveSnake();
 
   if(!mod){
@@ -147,6 +149,7 @@ function drawSnake(){
     else{ctx.fillStyle = '#0b5b0d';}
     let part = snakeParts[i];
     if(i==scorriPancia){
+      ctx.fillText(nomePlayer,part.x * tileCount, (part.y-5) * tileCount);
       ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize+2, tileSize+2);
     }
     else ctx.fillRect(1+part.x * tileCount, 1+part.y * tileCount, tileSize, tileSize);
