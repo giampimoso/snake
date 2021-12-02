@@ -168,7 +168,7 @@ function drawSnake(){
     ctx.fillRect(hX * tileCount,hY * tileCount,tileSize+2,tileSize+2);
     ctx.fillStyle = "white";
     ctx.font = "10px Verdana";
-    ctx.fillText("Prova",hX * tileCount,hY * tileCount-5);
+    ctx.fillText("Prova",hX * tileCount,hY * tileCount);
 }
 
 function moveSnake(){
