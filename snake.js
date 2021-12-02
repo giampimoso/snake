@@ -51,7 +51,7 @@ document.getElementById("stMod").value = "Impatto con Muri";
 
 //game loop
 function drawG(){
-  namePlayer = document.getElementById("username").value;
+  //namePlayer = document.getElementById("username").value;
   if(!end) moveSnake();
 
   if(!mod){
@@ -149,8 +149,10 @@ function drawSnake(){
     else{ctx.fillStyle = '#0b5b0d';}
     let part = snakeParts[i];
     if(i==scorriPancia){
+      let temp = ctx.fillStyle;
       ctx.fillStyle = "white";
       ctx.font = "10px Verdana";
+      ctx.fillStyle=temp;
       ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize+2, tileSize+2);
       ctx.fillText(nomePlayer,part.x * tileCount, part.y * tileCount);
     }
