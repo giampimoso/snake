@@ -45,7 +45,6 @@ const boostMusic = new Audio("boostMusic.mp3")
 
 let newMove=true;
 let end=false;
-let nomePlayer="Prova";
 
 document.getElementById("stMod").value = "Impatto con Muri";
 
@@ -149,12 +148,10 @@ function drawSnake(){
     else{ctx.fillStyle = '#0b5b0d';}
     let part = snakeParts[i];
     if(i==scorriPancia){
-      let temp = ctx.fillStyle;
+      ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize+2, tileSize+2);
       ctx.fillStyle = "white";
       ctx.font = "10px Verdana";
-      ctx.fillStyle=temp;
-      ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize+2, tileSize+2);
-      ctx.fillText(nomePlayer,part.x * tileCount, part.y * tileCount);
+      ctx.fillText("Prova",part.x * tileCount, part.y * tileCount);
     }
     else ctx.fillRect(1+part.x * tileCount, 1+part.y * tileCount, tileSize, tileSize);
   }
