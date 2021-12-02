@@ -149,7 +149,7 @@ function drawSnake(){
     else{ctx.fillStyle = '#0b5b0d';}
     let part = snakeParts[i];
     if(i==scorriPancia){
-      ctx.fillText(nomePlayer,part.x * tileCount, (part.y-5) * tileCount);
+      ctx.fillText(nomePlayer,part.x * tileCount, part.y * tileCount);
       ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize+2, tileSize+2);
     }
     else ctx.fillRect(1+part.x * tileCount, 1+part.y * tileCount, tileSize, tileSize);
