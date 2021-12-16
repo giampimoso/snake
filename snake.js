@@ -232,6 +232,7 @@ function drawCoin(){
     if(frame==-40){
         boostMusic.pause();
         boostMusic.currentTime = 0;
+        gameMusic.play();
         boost=false;
       }
     if(frame==-wait) {
@@ -260,6 +261,7 @@ function collisionCoin(){
     boost = true;
     boostSound.play();
     boostMusic.play();
+    gameMusic.pause();
   }
 }
 
