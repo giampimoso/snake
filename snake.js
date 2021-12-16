@@ -16,6 +16,7 @@ let wait = 100;
 let boost = false;
 let scorriPancia=0;
 let mod=true;
+let musica=false;
 
 const SPMAX = 12, SPMIN = 7;
 let speed = SPMIN; //velocità gioco
@@ -81,22 +82,36 @@ function drawG(){
     return;
   }
   if(!end){
-  if(gameMusic.ended == 1){
-    gameMusic.currentTime = 0;
-    gameMusic.play();
+    if(musica && gameMusic.ended == 1){
+      gameMusic.currentTime = 0;
+      gameMusic.play();
+    }
+    clScreen();
+    drawSnake();
+    collisionApple();
+    drawApple();
+    collisionCoin();
+    drawCoin();
+    drawScore();
+    eX=hX;
+    eY=hY;
+    setTimeout(drawG,1000/speed);
+    newMove=true;
   }
-  clScreen();
-  drawSnake();
-  collisionApple();
-  drawApple();
-  collisionCoin();
-  drawCoin();
-  drawScore();
-  eX=hX;
-  eY=hY;
-  setTimeout(drawG,1000/speed);
-  newMove=true;
 }
+
+function musicaGioco(){
+    if(!mod) {
+      document.getElementById("stMusica").value = "🔊";
+      musica=true;
+      gameMusic.play();
+      return;
+    }
+    else{
+      document.getElementById("stMusica").value = "!🔊";
+      gameMusic.pause();
+      musica=false;
+      return;
 }
 
 function modalita() {
@@ -232,9 +247,9 @@ function drawCoin(){
     if(frame==-40){
         boostMusic.pause();
         boostMusic.currentTime = 0;
-        gameMusic.play();
+        if(musica) gameMusic.play();
         boost=false;
-      }
+    }
     if(frame==-wait) {
       cX = Math.floor(Math.random() * tileCount);
       cY = Math.floor(Math.random() * tileCount);
@@ -245,13 +260,13 @@ function drawCoin(){
   }
   if(moneta){
     frame++;
-  ctx.fillStyle = "yellow";
-  ctx.beginPath();
-  ctx.arc((cX*tileCount)+(tileSize+2)/2, (cY*tileCount)+(tileSize+2)/2, (tileSize+2)/2, 0, 2 * Math.PI, false);
-  ctx.fill();
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = '#e8c118';
-  ctx.stroke();
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc((cX*tileCount)+(tileSize+2)/2, (cY*tileCount)+(tileSize+2)/2, (tileSize+2)/2, 0, 2 * Math.PI, false);
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#e8c118';
+    ctx.stroke();
   }
 
 }
@@ -259,9 +274,9 @@ function collisionCoin(){
   if(cX == hX && cY == hY && !boost){
     moneta = false;
     boost = true;
+    if(musica) gameMusic.pause();
     boostSound.play();
     boostMusic.play();
-    gameMusic.pause();
   }
 }
 
@@ -298,5 +313,4 @@ if((event.keyCode == 32) && end){
   history.go(0);
 }
 }
-gameMusic.play();
 drawG();
