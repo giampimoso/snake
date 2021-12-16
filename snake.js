@@ -296,5 +296,5 @@ if((event.keyCode == 32) && end){
   history.go(0);
 }
 }
-
+gameMusic.play();
 drawG();
