@@ -19,7 +19,7 @@ let mod=true;
 let musica=false;
 
 const SPMAX = 12, SPMIN = 7;
-let speed = SPMIN; //velocità gioco
+let speed = SPMIN; //velocitÃ  gioco
 
 let tileCount = 20;
 let tileSize = canvas.width/tileCount-4; //dimensione
@@ -49,6 +49,7 @@ let newMove=true;
 let end=false;
 
 document.getElementById("stMod").value = "Impatto con Muri";
+document.getElementById("stMusica").value = "Niente Musica";
 
 //game loop
 function drawG(){
@@ -77,12 +78,14 @@ function drawG(){
     ctx.fillText("Game Over!", canvas.width / 8, canvas.height / 2);
     boostMusic.pause();
     boostMusic.currentTime = 0;
-    gameMusic.pause();
-    gameMusic.currentTime = 0;
+	if(musica){
+		gameMusic.pause();
+		gameMusic.currentTime = 0;
+	}
     return;
   }
   if(!end){
-    if(musica && gameMusic.ended == 1){
+    if(musica && gameMusic.ended === 1){
       gameMusic.currentTime = 0;
       gameMusic.play();
     }
@@ -101,20 +104,21 @@ function drawG(){
 }
 
 function musicaGioco(){
-    if(!mod) {
-      document.getElementById("stMusica").value = "🔊";
+    if(!musica) {
+      document.getElementById("stMusica").value = "Musica";
       musica=true;
       gameMusic.play();
       return;
     }
     else{
-      document.getElementById("stMusica").value = "!🔊";
+      document.getElementById("stMusica").value = "Niente Musica";
       gameMusic.pause();
       musica=false;
       return;
+	}
 }
 
-function modalita() {
+function modalita(){
     if(!mod && vX==0 && vY==0) {
       document.getElementById("stMod").value = "Impatto con Muri";
       mod=true;
@@ -162,6 +166,7 @@ function clScreen(){
   ctx.fillStyle = 'black';
   ctx.fillRect(0,0,canvas.width,canvas.height);
 }
+
 function drawSnake(){
 
   for (let i = 0; i < snakeParts.length; i++) {
