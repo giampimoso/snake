@@ -42,6 +42,7 @@ let score = 0;
 const eatSound = new Audio("appleEatingSound.wav")
 const boostSound = new Audio("boostSound.wav")
 const boostMusic = new Audio("boostMusic.mp3")
+const gameMusic = new Audio("gameMusic.mp3")
 
 let newMove=true;
 let end=false;
@@ -75,9 +76,15 @@ function drawG(){
     ctx.fillText("Game Over!", canvas.width / 8, canvas.height / 2);
     boostMusic.pause();
     boostMusic.currentTime = 0;
+    gameMusic.pause();
+    gameMusic.currentTime = 0;
     return;
   }
   if(!end){
+  if(gameMusic.ended == 1){
+    gameMusic.currentTime = 0;
+    gameMusic.play();
+  }
   clScreen();
   drawSnake();
   collisionApple();
