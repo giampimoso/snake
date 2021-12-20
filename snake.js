@@ -17,7 +17,7 @@ let boost = false;
 let scorriPancia=0;
 let mod=true;
 let musica=false;
-let nomePlayer;
+var nomePlayer= new String("");
 
 const SPMAX = 12, SPMIN = 7;
 let speed = SPMIN; //velocitÃ  gioco
@@ -54,7 +54,7 @@ document.getElementById("stMusica").value = "Niente Musica";
 
 //game loop
 function drawG(){
-  if(!started()) nomePlayer = document.getElementById("username").value;
+  if(!started()){ nomePlayer = document.getElementById("username").value;}
   if(!end){
       moveSnake();
       if(musica && gameMusic.ended === 1){
@@ -103,7 +103,6 @@ function drawG(){
     setTimeout(drawG,1000/speed);
     newMove=true;
   }
-}
 
 function musicaGioco(){
     if(!musica) {
@@ -208,8 +207,8 @@ function moveSnake(){
 }
 
 function started(){
-  if(vY != 0 || vX !=0) return 1;
-  else return 0;
+  if(vY != 0 || vX !=0) return true;
+  else return false;
 }
 
 function drawApple(){
