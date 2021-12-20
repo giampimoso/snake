@@ -54,7 +54,7 @@ document.getElementById("stMusica").value = "Niente Musica";
 
 //game loop
 function drawG(){
-  if(!start()) nomePlayer = document.getElementById("username").value;
+  if(!started()) nomePlayer = document.getElementById("username").value;
   if(!end){
       moveSnake();
       if(musica && gameMusic.ended === 1){
