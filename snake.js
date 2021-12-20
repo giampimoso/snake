@@ -17,6 +17,7 @@ let boost = false;
 let scorriPancia=0;
 let mod=true;
 let musica=false;
+let nomePlayer;
 
 const SPMAX = 12, SPMIN = 7;
 let speed = SPMIN; //velocitÃ  gioco
@@ -53,8 +54,14 @@ document.getElementById("stMusica").value = "Niente Musica";
 
 //game loop
 function drawG(){
-  if(!end) moveSnake();
-
+  if(!start()) nomePlayer = document.getElementById("username").value;
+  if(!end){
+      moveSnake();
+      if(musica && gameMusic.ended === 1){
+     	 gameMusic.currentTime = 0;
+     	 gameMusic.play();
+      }
+  }
   if(!mod){
      if(hX < 0 && !mod) {
       hX=tileCount-1;
@@ -84,11 +91,6 @@ function drawG(){
 	}
     return;
   }
-  if(!end){
-    if(musica && gameMusic.ended === 1){
-      gameMusic.currentTime = 0;
-      gameMusic.play();
-    }
     clScreen();
     drawSnake();
     collisionApple();
@@ -159,7 +161,7 @@ function gameOver(){
 function drawScore() {
   ctx.fillStyle = "white";
   ctx.font = "10px Verdana";
-  ctx.fillText("Score: "+ score,canvas.width-50, 10);
+  ctx.fillText("Score: "+ score,canvas.width-100, 10);
 }
 
 function clScreen(){
@@ -194,7 +196,7 @@ function drawSnake(){
     ctx.fillRect(hX * tileCount,hY * tileCount,tileSize+2,tileSize+2);
     ctx.fillStyle = "white";
     ctx.font = "10px Verdana";
-    ctx.fillText(document.getElementById("username").value,hX * tileCount-5,hY * tileCount-1);
+    ctx.fillText(nomePlayer,hX * tileCount-5,hY * tileCount-1);
 }
 
 function moveSnake(){
@@ -203,6 +205,11 @@ function moveSnake(){
 
   hX = hX + vX;
   hY = hY + vY;
+}
+
+function started(){
+  if(vY != 0 || vX !=0) return 1;
+  else return 0;
 }
 
 function drawApple(){
