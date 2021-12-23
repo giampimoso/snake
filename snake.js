@@ -18,6 +18,7 @@ let scorriPancia=0;
 let mod=true;
 let musica=false;
 var nomePlayer= new String("");
+let pausa = false;
 
 const SPMAX = 12, SPMIN = 7;
 let speed = SPMIN; //velocitÃ  gioco
@@ -54,55 +55,63 @@ document.getElementById("stMusica").value = "Niente Musica";
 
 //game loop
 function drawG(){
-  if(!started()){ nomePlayer = document.getElementById("username").value;}
-  if(!end){
-      moveSnake();
-      if(musica && gameMusic.ended === 1){
-     	 gameMusic.currentTime = 0;
-     	 gameMusic.play();
-      }
-  }
-  if(!mod){
-     if(hX < 0 && !mod) {
-      hX=tileCount-1;
-     }
+	if(!pausa){
+	  if(!started()){
+		nomePlayer = document.getElementById("username").value;
+	  }
+	  if(!end){
+		  moveSnake();
+		  if(musica && gameMusic.ended === 1){
+			 gameMusic.currentTime = 0;
+			 gameMusic.play();
+		  }
+	  }
+	  if(!mod){
+		 if(hX < 0 && !mod) {
+		  hX=tileCount-1;
+		 }
 
-     if(hY < 0 && !mod) {
-      hY=tileCount-1;
-     }
+		 if(hY < 0 && !mod) {
+		  hY=tileCount-1;
+		 }
 
-     if(hX >= tileCount && !mod) {
-      hX=0;
-     }
+		 if(hX >= tileCount && !mod) {
+		  hX=0;
+		 }
 
-     if(hY >= tileCount && !mod) {
-      hY=0;
-     }
-  }
-  if(gameOver()){
-    ctx.fillStyle = "white";
-    ctx.font = "50px Verdana";
-    ctx.fillText("Game Over!", canvas.width / 8, canvas.height / 2);
-    boostMusic.pause();
-    boostMusic.currentTime = 0;
-	if(musica){
-		gameMusic.pause();
-		gameMusic.currentTime = 0;
+		 if(hY >= tileCount && !mod) {
+		  hY=0;
+		 }
+	  }
+	  if(gameOver()){
+		ctx.fillStyle = "white";
+		ctx.font = "50px Verdana";
+		ctx.fillText("Game Over!", canvas.width / 8, canvas.height / 2);
+		boostMusic.pause();
+		boostMusic.currentTime = 0;
+		if(musica){
+			gameMusic.pause();
+			gameMusic.currentTime = 0;
+		}
+		return;
+	  }
+		clScreen();
+		drawSnake();
+		collisionApple();
+		drawApple();
+		collisionCoin();
+		drawCoin();
+		drawScore();
+		eX=hX;
+		eY=hY;
 	}
-    return;
+		setTimeout(drawG,1000/speed);
+		newMove=true;
   }
-    clScreen();
-    drawSnake();
-    collisionApple();
-    drawApple();
-    collisionCoin();
-    drawCoin();
-    drawScore();
-    eX=hX;
-    eY=hY;
-    setTimeout(drawG,1000/speed);
-    newMove=true;
-  }
+  
+/*function musicaYoutube(){
+	document.getElementById("youtube-audio").setAttribute("data-video", document.getElementById("datavideo").value);
+}*/
 
 function musicaGioco(){
     if(!musica) {
@@ -142,7 +151,8 @@ function gameOver(){
     setTimeout(() => {
     ctx.fillStyle = "#bef059";
     ctx.fillRect(eX * tileCount, eY * tileCount, tileSize+2, tileSize+2);},500);
-    return true;}
+    return true;
+	}
 
   for (let i = 0; i < snakeParts.length; i++) {
     if( snakeParts[i].x === hX && snakeParts[i].y === hY) {
@@ -295,33 +305,38 @@ document.body.addEventListener('keydown', keyDown);
 
 function keyDown(event){
   if(newMove){
-  //up /*event.keyCode == 87 ||*/
-  if(( event.keyCode == 38) && vY!=1){
-    vY = -1;
-    vX = 0;
-    newMove=false;
-  }
-  //down /*event.keyCode == 83 ||*/
-  if(( event.keyCode == 40) && vY!=-1){
-    vY = 1;
-    vX = 0;
-    newMove=false;
-  }
-  //left /*event.keyCode == 65 ||*/
-  if(( event.keyCode == 37) && vX!=1){
-    vY = 0;
-    vX = -1;
-    newMove=false;
-  }
-  //right /*event.keyCode == 68 ||*/
-  if(( event.keyCode == 39) && vX!=-1){
-    vY = 0;
-    vX = 1;
-    newMove=false;
-  }
-}
-if((event.keyCode == 32) && end){
-  history.go(0);
-}
+	  //up /*event.keyCode == 87 ||*/
+	  if(( event.keyCode == 38) && vY!=1){
+		vY = -1;
+		vX = 0;
+		newMove=false;
+	  }
+	  //down /*event.keyCode == 83 ||*/
+	  if(( event.keyCode == 40) && vY!=-1){
+		vY = 1;
+		vX = 0;
+		newMove=false;
+	  }
+	  //left /*event.keyCode == 65 ||*/
+	  if(( event.keyCode == 37) && vX!=1){
+		vY = 0;
+		vX = -1;
+		newMove=false;
+	  }
+	  //right /*event.keyCode == 68 ||*/
+	  if(( event.keyCode == 39) && vX!=-1){
+		vY = 0;
+		vX = 1;
+		newMove=false;
+	  }
+	}
+	if(event.keyCode == 32){
+	  if(end){
+		history.go(0);
+	  }
+	  else{
+		pausa=!pausa;
+	  }
+	}
 }
 drawG();
